@@ -23,6 +23,12 @@
     <loc>/posts/hello/</loc>
     <lastmod>2025-08-12T18:20:04+08:00</lastmod>
   </url><url>
+    <loc>/tags/rust/</loc>
+    <lastmod>2025-08-12T18:20:04+08:00</lastmod>
+  </url><url>
+    <loc>/tags/test/</loc>
+    <lastmod>2025-08-12T18:20:04+08:00</lastmod>
+  </url><url>
     <loc>/categories/</loc>
   </url>
 </urlset>

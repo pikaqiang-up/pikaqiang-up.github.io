@@ -23,5 +23,19 @@
       <guid>/tags/%E9%A2%A0/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Rust</title>
+      <link>/tags/rust/</link>
+      <pubDate>Tue, 12 Aug 2025 18:20:04 +0800</pubDate>
+      <guid>/tags/rust/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Test</title>
+      <link>/tags/test/</link>
+      <pubDate>Tue, 12 Aug 2025 18:20:04 +0800</pubDate>
+      <guid>/tags/test/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
