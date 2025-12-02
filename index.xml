@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>I LOVE PIKAQIANG!</title>
+    <link>/</link>
+    <description>Recent content on I LOVE PIKAQIANG!</description>
+    <generator>Hugo</generator>
+    <language>zh_cn</language>
+    <copyright>&lt;a href=&#34;https://github.com/pikaqiang-up&#34;&gt;pikaqiang-up&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 30 Nov 2025 17:09:23 +0000</lastBuildDate>
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Krkr游戏制作pt1.快速入门</title>
+      <link>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 30 Nov 2025 17:09:23 +0000</pubDate>
+      <guid>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;h2 id=&#34;基本介绍&#34;&gt;基本介绍&lt;/h2&gt;&#xA;&lt;p&gt;krkr是一款用于制作视觉小说的游戏引擎。&lt;/p&gt;&#xA;&lt;p&gt;我们的教程将会从头文件开始，逐步做出一个&lt;del&gt;能运行的&lt;/del&gt;视觉小说&lt;/p&gt;&#xA;&lt;h2 id=&#34;目录结构&#34;&gt;目录结构&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-tree&#34; data-lang=&#34;tree&#34;&gt;YourKrKrProject/&#xA;├── Data&#xA;│   ├── startup.tjs&#xA;│   ├── Config.tjs&#xA;│   ├── bgimage/&#xA;│   ├── bgm/&#xA;│   ├── fgimage/&#xA;│   ├── image/&#xA;│   ├── others/&#xA;│   ├── rule/&#xA;│   ├── scenario/&#xA;│   ├── sound/&#xA;│   ├── system/&#xA;│   ├── video/&#xA;│   ├── voice/&#xA;│   └──*.dll&#xA;└── krkr.exe&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是krk的KAGeXpressr模板默认的目录结构。&lt;/p&gt;&#xA;&lt;p&gt;其中最主要的是&lt;code&gt;scenario/&lt;/code&gt;目录，它是用于存放剧情脚本的地方。&#xA;我们的教程也是先从这里开始。&lt;/p&gt;&#xA;&lt;p&gt;而&lt;code&gt;Config.tjs&lt;/code&gt;是用来配置基本设置的地方，&#xA;可以设置游戏名称，窗口大小等相关设定，这里先不做介绍。&lt;/p&gt;&#xA;&lt;p&gt;其他的目录看目录名也能知道大概用法，这里先不展开细讲。&lt;/p&gt;&#xA;&lt;p&gt;让我们先关注一下&lt;code&gt;scenario/&lt;/code&gt;文件夹下的&lt;code&gt;first.ks&lt;/code&gt;文件。&#xA;这是一切的开始。&#xA;我们将在这个文件内写我们的脚本。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;特别提醒，所有的krkr使用的脚本都应是GBK编码，否则会报错。&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;ks语法&#34;&gt;ks语法&lt;/h2&gt;&#xA;&lt;p&gt;首先，ks脚本可以看作是带有各种标记的txt文本，类似html。&lt;/p&gt;&#xA;&lt;p&gt;但是ks的标记和html的标签完全不同，&#xA;html的标签通常有开始和结尾，从标签头到标签尾的所有内容才算作一个标记，即标记标签头到标签尾的内容；&#xA;ks的标记是没有结束标志的，因为它本身就是一个完整的标记，ks的标记可以看作是一个指令，即运行到这个标记就直接运行标记所代表的指令。&lt;/p&gt;&#xA;&lt;p&gt;ks的标记有两种书写方式。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-ks&#34; data-lang=&#34;ks&#34;&gt;@标记名 参数&#xA;其他文本&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>一个人的早餐</title>
+      <link>/posts/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%A9%E9%A4%90/</link>
+      <pubDate>Sat, 22 Nov 2025 01:58:18 +0000</pubDate>
+      <guid>/posts/%E4%B8%80%E4%B8%AA%E4%BA%BA%E7%9A%84%E6%97%A9%E9%A4%90/</guid>
+      <description>&lt;p&gt;这应该是我第一次早上一个人在家。所以我能自由的选择吃或者不吃。&lt;/p&gt;&#xA;&lt;p&gt;其实我睡醒的时候已经8点半了。赖一下床，洗漱完之后就已经9点多了。&lt;/p&gt;&#xA;&lt;p&gt;附近新开的那家早餐店，我也只是在里面试过油条而已。里面其实是会卖汤粉的，不知道会不会卖炒粉。&lt;/p&gt;&#xA;&lt;p&gt;昨天没洗澡，所以没换衣服。所以我今天早上穿着校服就出去了。路上有一群老奶奶在那里聊天，他们一定是注意到我了。被年长者紧盯着的感觉真的很不妙啊，特别是我还穿着校服。&lt;/p&gt;&#xA;&lt;p&gt;所以我回来的时候就选择了另一条路。&lt;/p&gt;&#xA;&lt;p&gt;不过这里面早餐还挺不错的。牛肉粉12块钱一碗。牛肉粒大且很多。但它的配料好像有点怪，没记错的话，有辣椒，豆子（软烂的），海带，榨菜（应该是），还有生姜（里面还有豆豉）。&lt;/p&gt;&#xA;&lt;p&gt;我这碗里就加了点辣椒油和生姜。&lt;/p&gt;&#xA;&lt;p&gt;味道整体还不错，但是我不喜欢这种牛肉的味道。这牛肉是卤制的，炖的软烂。我感觉有种煮久了的味道。毕竟我去的时候也已经快9点半了。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;/images/%E7%89%9B%E8%82%89%E7%B2%89.jpg&#34; alt=&#34;牛肉粉&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>烹饪初始</title>
+      <link>/posts/%E7%83%B9%E9%A5%AA%E5%88%9D%E5%A7%8B/</link>
+      <pubDate>Fri, 21 Nov 2025 10:19:39 +0000</pubDate>
+      <guid>/posts/%E7%83%B9%E9%A5%AA%E5%88%9D%E5%A7%8B/</guid>
+      <description>&lt;p&gt;做饭感觉不太难。&lt;/p&gt;&#xA;&lt;p&gt;还行。&lt;/p&gt;&#xA;&lt;p&gt;饭没熟，因为水放少了，夹生。&lt;/p&gt;&#xA;&lt;p&gt;辣椒炒肉的话，嗯&amp;hellip;没放盐。所以用来拌饭了。&#xA;还有一件事，除了洗菜，我其他的水用的都是润田。&#xA;&lt;img src=&#34;/images/%E7%83%B9%E9%A5%AA%E5%88%9D%E5%A7%8B/IMG20251121181048_c.jpg&#34; alt=&#34;青辣椒炒豆腐&#34;&gt;&#xA;&lt;img src=&#34;/images/%E7%83%B9%E9%A5%AA%E5%88%9D%E5%A7%8B/IMG20251121181051_c.jpg&#34; alt=&#34;青辣椒炒猪肉&#34;&gt;&#xA;&lt;img src=&#34;/images/%E7%83%B9%E9%A5%AA%E5%88%9D%E5%A7%8B/IMG20251121182455_c.jpg&#34; alt=&#34;开始吃饭&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>乐理学习</title>
+      <link>/posts/%E4%B9%90%E7%90%86%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Tue, 28 Oct 2025 04:44:50 +0000</pubDate>
+      <guid>/posts/%E4%B9%90%E7%90%86%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;/images/%E4%B9%90%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.jpg&#34; alt=&#34;笔记&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fail</title>
+      <link>/posts/fail/</link>
+      <pubDate>Mon, 18 Aug 2025 11:15:58 +0000</pubDate>
+      <guid>/posts/fail/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Great_again</title>
+      <link>/posts/great_again/</link>
+      <pubDate>Thu, 14 Aug 2025 08:13:31 +0000</pubDate>
+      <guid>/posts/great_again/</guid>
+      <description>&lt;h1 id=&#34;让皮卡强再次伟大&#34;&gt;让皮卡强再次伟大&lt;/h1&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;big&gt;&lt;em&gt;皮卡强&lt;/em&gt;&lt;/big&gt;,旧时强大与荣耀的代名词，如今也沦为笑柄。&lt;/p&gt;&#xA;&lt;p&gt;在经历末日灾变之后，皮卡强的&lt;strong&gt;耐心&lt;/strong&gt;已然所剩无几。&lt;br&gt;&#xA;于是，皮卡强变得失控，开始向_深渊_坠落。&lt;br&gt;&#xA;漫长的下坠后，皮卡强的瞳孔失去了高光，转而之的是混浊的灰黑。&lt;br&gt;&#xA;堕于黑夜的皮卡强终究褪去了往日的荣光。&lt;/p&gt;&#xA;&lt;p&gt;为了让皮卡强再次伟大，&lt;br&gt;&#xA;我们必须行动，&lt;/p&gt;&#xA;&lt;p&gt;用无尽的赐福和资源驱散皮卡强的污浊，&lt;br&gt;&#xA;用密集的ˋcoinˋ为皮卡强织衣，&lt;br&gt;&#xA;以璀璨的水晶和神秘的黑曜石为皮卡强重新加冕。&lt;/p&gt;&#xA;&lt;p&gt;我们要为皮卡强打造钻石般坚固的&lt;strong&gt;patience&lt;/strong&gt;&lt;br&gt;&#xA;愿皮卡强再临至高的天空之城。&lt;/p&gt;&#xA;&lt;p&gt;让皮卡强再次伟大！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello</title>
+      <link>/posts/hello/</link>
+      <pubDate>Tue, 12 Aug 2025 18:20:04 +0800</pubDate>
+      <guid>/posts/hello/</guid>
+      <description>&lt;h1 id=&#34;hello-world&#34;&gt;HELLO WORLD&lt;/h1&gt;&#xA;&lt;hr&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;fn&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;mut&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;:&lt;span class=&#34;kp&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;str&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Hello world!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;println!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;var&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>/posts/%E6%9C%AA%E5%AE%9A%E4%B9%89/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/posts/%E6%9C%AA%E5%AE%9A%E4%B9%89/</guid>
+      <description>&lt;p&gt;我拾起时光中的沙砾。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

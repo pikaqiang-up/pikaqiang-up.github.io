@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>游戏制作 on I LOVE PIKAQIANG!</title>
+    <link>/tags/%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9C/</link>
+    <description>Recent content in 游戏制作 on I LOVE PIKAQIANG!</description>
+    <generator>Hugo</generator>
+    <language>zh_cn</language>
+    <copyright>&lt;a href=&#34;https://github.com/pikaqiang-up&#34;&gt;pikaqiang-up&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 30 Nov 2025 17:09:23 +0000</lastBuildDate>
+    <atom:link href="/tags/%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Krkr游戏制作pt1.快速入门</title>
+      <link>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sun, 30 Nov 2025 17:09:23 +0000</pubDate>
+      <guid>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;h2 id=&#34;基本介绍&#34;&gt;基本介绍&lt;/h2&gt;&#xA;&lt;p&gt;krkr是一款用于制作视觉小说的游戏引擎。&lt;/p&gt;&#xA;&lt;p&gt;我们的教程将会从头文件开始，逐步做出一个&lt;del&gt;能运行的&lt;/del&gt;视觉小说&lt;/p&gt;&#xA;&lt;h2 id=&#34;目录结构&#34;&gt;目录结构&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-tree&#34; data-lang=&#34;tree&#34;&gt;YourKrKrProject/&#xA;├── Data&#xA;│   ├── startup.tjs&#xA;│   ├── Config.tjs&#xA;│   ├── bgimage/&#xA;│   ├── bgm/&#xA;│   ├── fgimage/&#xA;│   ├── image/&#xA;│   ├── others/&#xA;│   ├── rule/&#xA;│   ├── scenario/&#xA;│   ├── sound/&#xA;│   ├── system/&#xA;│   ├── video/&#xA;│   ├── voice/&#xA;│   └──*.dll&#xA;└── krkr.exe&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是krk的KAGeXpressr模板默认的目录结构。&lt;/p&gt;&#xA;&lt;p&gt;其中最主要的是&lt;code&gt;scenario/&lt;/code&gt;目录，它是用于存放剧情脚本的地方。&#xA;我们的教程也是先从这里开始。&lt;/p&gt;&#xA;&lt;p&gt;而&lt;code&gt;Config.tjs&lt;/code&gt;是用来配置基本设置的地方，&#xA;可以设置游戏名称，窗口大小等相关设定，这里先不做介绍。&lt;/p&gt;&#xA;&lt;p&gt;其他的目录看目录名也能知道大概用法，这里先不展开细讲。&lt;/p&gt;&#xA;&lt;p&gt;让我们先关注一下&lt;code&gt;scenario/&lt;/code&gt;文件夹下的&lt;code&gt;first.ks&lt;/code&gt;文件。&#xA;这是一切的开始。&#xA;我们将在这个文件内写我们的脚本。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;特别提醒，所有的krkr使用的脚本都应是GBK编码，否则会报错。&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;ks语法&#34;&gt;ks语法&lt;/h2&gt;&#xA;&lt;p&gt;首先，ks脚本可以看作是带有各种标记的txt文本，类似html。&lt;/p&gt;&#xA;&lt;p&gt;但是ks的标记和html的标签完全不同，&#xA;html的标签通常有开始和结尾，从标签头到标签尾的所有内容才算作一个标记，即标记标签头到标签尾的内容；&#xA;ks的标记是没有结束标志的，因为它本身就是一个完整的标记，ks的标记可以看作是一个指令，即运行到这个标记就直接运行标记所代表的指令。&lt;/p&gt;&#xA;&lt;p&gt;ks的标记有两种书写方式。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-ks&#34; data-lang=&#34;ks&#34;&gt;@标记名 参数&#xA;其他文本&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
