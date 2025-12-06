@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>zh_cn</language>
     <copyright>&lt;a href=&#34;https://github.com/pikaqiang-up&#34;&gt;pikaqiang-up&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 30 Nov 2025 17:09:23 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Dec 2025 16:07:53 +0000</lastBuildDate>
     <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Krkr游戏制作pt1r.快速入门</title>
+      <link>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1r.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 06 Dec 2025 16:07:53 +0000</pubDate>
+      <guid>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1r.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;h1 id=&#34;krkr快速入门重制版&#34;&gt;krkr快速入门（重制版）&lt;/h1&gt;&#xA;&lt;p&gt;由于上一版写得跟屎一样，除了我基本没人能看懂，故开始写这一版。&lt;/p&gt;&#xA;&lt;p&gt;这一版我的目标是详细和通俗。&lt;/p&gt;&#xA;&lt;h2 id=&#34;开始&#34;&gt;开始&lt;/h2&gt;&#xA;&lt;p&gt;首先是基本文件。&#xA;请先下载KAGeXpress。&lt;/p&gt;&#xA;&lt;p&gt;这是完整的KAGeXpress包 &lt;a href=&#34;https://pikaqiang.lanzouq.com/iABSU3d0fzli&#34;&gt;https://pikaqiang.lanzouq.com/iABSU3d0fzli&lt;/a&gt;&lt;br&gt;&#xA;这是我修改过的KAGeXpress模板 &lt;a href=&#34;https://pikaqiang.lanzouq.com/iwzcr3d0fkli&#34;&gt;https://pikaqiang.lanzouq.com/iwzcr3d0fkli&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;原本的KAGeXpress来自keyFC同人发展促进会，由KCDDP制作。&#xA;相关链接:&lt;br&gt;&#xA;keyFC：http://krkr.keyfc.net/ &lt;br&gt;&#xA;KCDDP：http://kcddp.keyfc.net/&lt;br&gt;&#xA;吉里吉里2：http://kikyou.info/&lt;/p&gt;&#xA;&lt;p&gt;不过由于时间的磨损，这几个网站都访问不了了，我放在这里仅供纪念。&#xA;但你可以自行寻找互联网档案馆的存档镜像来查看当年的历史，这里不再赘述。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Krkr游戏制作pt1.快速入门</title>
       <link>/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
