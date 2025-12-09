@@ -131,7 +131,7 @@
   <h1 class="post-title">
     <a href="/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1r.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">Krkr游戏制作pt1r.快速入门</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2025-12-06</time><span class="post-author">PIKAQIANG</span><span class="post-reading-time">1 min read (18 words)</span></div>
+  <div class="post-meta"><time class="post-date">2025-12-06</time><span class="post-author">PIKAQIANG</span><span class="post-reading-time">3 min read (444 words)</span></div>
 
   
     <span class="post-tags">
@@ -169,6 +169,143 @@ KCDDP：http://kcddp.keyfc.net/<br>
 <del>但你可以自行寻找互联网档案馆的存档镜像来查看当年的历史，这里不再赘述。</del>
 <br>
 其实都还在，只是换站了。</p>
+<h2 id="文件结构">文件结构<a href="#文件结构" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>下载完KAGeXpress的模板后，建议把它放在一个容易找到的文件夹。如<code>/sdcard/games/</code>。</p>
+<p>解压后你将看到像这样的文件结构：</p>
+<pre tabindex="0"><code class="language-tr" data-lang="tr">YourKrKrProject/
+├── Data
+│   ├── startup.tjs
+│   ├── Config.tjs
+│   ├── bgimage/
+│   ├── bgm/
+│   ├── fgimage/
+│   ├── image/
+│   ├── others/
+│   ├── rule/
+│   ├── scenario/
+│   ├── sound/
+│   ├── system/
+│   ├── video/
+│   ├── voice/
+│   └──*.dll
+└── krkr.exe
+</code></pre><p><code>krkr.exe</code>是吉里吉里的游戏开始入口，Windows电脑通过它启动游戏。</p>
+<p><code>Data/</code>是游戏的本体，所有游戏内容都在这个文件夹内，打包后就是常见的data.xp3。</p>
+<ul>
+<li>其中<code>config.tjs</code>是游戏配置，包括游戏名称，默认窗口分辨率等东西（但是窗口分辨率不建议修改，因为修改窗口分辨率不会修改模板的组件分辨率，这样会导致严重的渲染bug）</li>
+<li><code>bgm/</code>是存放背景音乐的目录。<code>voice/</code>是用来存放人物声音的目录。<code>sound/</code>是用来存放各种音效的目录。</li>
+<li><code>fgimage/</code>是存放前景图片的目录，一般用于存放人物立绘。<code>bgimage/</code>是存放背景图片的目录。<code>rule/</code>是存放渐变图的目录，用于定义渐变效果。</li>
+<li><code>video/</code>是用于存放视频文件的位置，一般用于存放OP和ED之类。<code>other/</code>存放一些未分类的东西。</li>
+<li><code>*.dll</code>指<code>extNagano.dll     extrans.dll       krflash.dll       krmovie.dll       layerExImage.dll  wump3.dll         wumsadp.dll       wutcwf.dll        wuvorbis.dll</code>是一些插件，用于兼容一些格式和效果（我也不知道具体是什么）。</li>
+<li><code>scenario/</code>用于存放剧本文件，我们的项目也就从这里开始。</li>
+</ul>
+<h2 id="mt管理器段使用">mt管理器段使用<a href="#mt管理器段使用" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>mt管理器下载地址：<a href="https://mt2.cn/">mt2.cn</a></p>
+<p>krkr的kag脚本语法高亮：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// require MT &gt;= 2.16.0
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nx">name</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;KAGScript&#34;</span><span class="p">,</span> <span class="s2">&#34;.ks&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="nx">ignoreCase</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="nx">hide</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="c1">// 蓝紫系自定义样式：标签突出，指令弱化，样式分层清晰
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span>    <span class="nx">styles</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="c1">// 标签样式：高对比度行背景+加粗，视觉优先级最高
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;tagWhole&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">6</span><span class="nx">a0dad$6522A2</span><span class="p">,</span> <span class="err">#</span><span class="mi">4</span><span class="nx">b0082$563E86</span><span class="p">,</span> <span class="err">@</span><span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="c1">// 指令符号样式（@/[]）：浅紫加粗，低存在感但有区分
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;cmdSymbol&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">8</span><span class="nx">a2be2</span><span class="p">,</span> <span class="err">#</span><span class="mi">9370</span><span class="nx">db</span><span class="p">,</span> <span class="err">@</span><span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="c1">// 指令整体样式：浅蓝紫低饱和度，弱化整体观感
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;instrWhole&#34;</span><span class="p">,</span> <span class="err">#</span><span class="nx">d8bfd8</span><span class="p">,</span> <span class="err">#</span><span class="nx">ABABC0</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="c1">// 普通指令名样式：淡紫蓝，基础区分（优先级高于instrWhole）
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;cmdNameNormal&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">9370</span><span class="nx">db</span><span class="p">,</span> <span class="err">#</span><span class="mi">8</span><span class="nx">a2be2</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="c1">// 关键指令名样式：同基础色+加粗，不额外提亮
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;cmdNameKey&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">9370</span><span class="nx">db</span><span class="p">,</span> <span class="err">#</span><span class="mi">8</span><span class="nx">a2be2</span><span class="p">,</span> <span class="err">@</span><span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="c1">// 普通参数名样式：深紫蓝，不加粗
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;paramNameNormal&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">483</span><span class="nx">d8b</span><span class="p">,</span> <span class="err">#</span><span class="mi">835</span><span class="nx">CFF</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="c1">// 关键参数名样式：同基础色+加粗
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;paramNameKey&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">483</span><span class="nx">d8b</span><span class="p">,</span> <span class="err">#</span><span class="mi">835</span><span class="nx">CFF</span><span class="p">,</span> <span class="err">@</span><span class="nx">B</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="c1">// 参数值样式：深灰紫，极致弱化
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;paramValue&#34;</span><span class="p">,</span> <span class="err">#</span><span class="mi">55437</span><span class="nx">a</span><span class="p">,</span> <span class="err">#</span><span class="mi">624</span><span class="nx">F8C</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="c1">// 注释配置：分号开头的行注释，支持快捷切换
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="c1"></span>    <span class="nx">comment</span><span class="o">:</span> <span class="p">{</span><span class="nx">startsWith</span><span class="o">:</span> <span class="s2">&#34;;&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="c1">// 括号配对：支持常见括号，辅助代码结构识别
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="c1"></span>    <span class="nx">bracketPairs</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;{}&#34;</span><span class="p">,</span> <span class="s2">&#34;[]&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;()&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    <span class="c1">// 可复用正则/匹配器定义：关键词集中管理，便于修改
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="c1"></span>    <span class="nx">defines</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="c1">// 关键指令名列表：修改只需调整此字符串内词汇
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;keyCmdRegex&#34;</span><span class="o">:</span> <span class="nx">keywordsToRegex</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">            <span class="s2">&#34;link endlink jump call deffont position&#34;</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">            <span class="s2">&#34;bgm bg fg se p l r&#34;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        <span class="c1">// 关键参数名列表：修改只需调整此字符串内词汇
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;keyParamRegex&#34;</span><span class="o">:</span> <span class="nx">keywordsToRegex</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">            <span class="s2">&#34;storage file left right x y rule&#34;</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">        <span class="c1">// 普通指令名正则：排除关键指令名，自动适配关键词变更
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;normalCmdRegex&#34;</span><span class="o">:</span> <span class="sr">/(?!#|\*|&amp;)\w+/</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="c1">// 普通参数名正则：排除关键参数名，仅匹配带=的参数
+</span></span></span><span class="line"><span class="ln">47</span><span class="cl"><span class="c1"></span>        <span class="s2">&#34;normalParamRegex&#34;</span><span class="o">:</span> <span class="sr">/(?!#|\*|&amp;)\w+(?=\s*=)/</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">
+</span></span><span class="line"><span class="ln">50</span><span class="cl">    <span class="nx">contains</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">        <span class="c1">// 1. KAG标签匹配器：整行优先，确保最显眼
+</span></span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">            <span class="nx">match</span><span class="o">:</span> <span class="sr">/(?m)^(\*.*?)(?:\n|.*)$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">            <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;tagWhole&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">            <span class="c1">// 子匹配器细化标签ID和名称
+</span></span></span><span class="line"><span class="ln">56</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/\*([\w-]+)(?:\|(.+?))?(?=\n|$)/</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s2">&#34;paramNameKey&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span> <span class="s2">&#34;tagWhole&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl">
+</span></span><span class="line"><span class="ln">59</span><span class="cl">        <span class="c1">// 2. 块模式指令匹配器（[]包裹）：先匹配符号，再分层处理指令名/参数
+</span></span></span><span class="line"><span class="ln">60</span><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">61</span><span class="cl">            <span class="nx">match</span><span class="o">:</span> <span class="sr">/(\[.*?\])/</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">62</span><span class="cl">            <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;instrWhole&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">63</span><span class="cl">            <span class="c1">// 子匹配器1：优先匹配指令符号[]
+</span></span></span><span class="line"><span class="ln">64</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/\[|\]/</span><span class="p">,</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;cmdSymbol&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">65</span><span class="cl">            <span class="c1">// 子匹配器2：关键指令名（引用defines中的正则）
+</span></span></span><span class="line"><span class="ln">66</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/(?&lt;=\[)\s*/</span> <span class="o">+</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;keyCmdRegex&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="sr">/\s*(?=[=\s\]])/</span><span class="p">,</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;cmdNameKey&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">67</span><span class="cl">            <span class="c1">// 子匹配器3：普通指令名（引用defines中的排除正则）
+</span></span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/(?&lt;=\[)\s*/</span> <span class="o">+</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;normalCmdRegex&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="sr">/\s*(?=[=\s\]])/</span><span class="p">,</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;cmdNameNormal&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">69</span><span class="cl">            <span class="c1">// 子匹配器4：关键参数名（引用defines中的正则）
+</span></span></span><span class="line"><span class="ln">70</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;keyParamRegex&#34;</span><span class="p">),</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;paramNameKey&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">71</span><span class="cl">            <span class="c1">// 子匹配器5：普通参数名（引用defines中的正则）
+</span></span></span><span class="line"><span class="ln">72</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;normalParamRegex&#34;</span><span class="p">),</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;paramNameNormal&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">73</span><span class="cl">            <span class="c1">// 子匹配器6：参数值
+</span></span></span><span class="line"><span class="ln">74</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/=(.*?)[\s\]]/</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s2">&#34;paramValue&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">75</span><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="ln">76</span><span class="cl">
+</span></span><span class="line"><span class="ln">77</span><span class="cl">        <span class="c1">// 3. 行模式指令匹配器（修复子匹配器2/3不生效问题，调整正则锚定和优先级）
+</span></span></span><span class="line"><span class="ln">78</span><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">79</span><span class="cl">            <span class="nx">match</span><span class="o">:</span> <span class="sr">/(?m)^(\s*@.*?)(?:\n|$)/</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">80</span><span class="cl">            <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;instrWhole&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">81</span><span class="cl">            <span class="c1">// 子匹配器1：优先匹配@符号，确保符号样式先生效
+</span></span></span><span class="line"><span class="ln">82</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/@/</span><span class="p">,</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;cmdSymbol&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">83</span><span class="cl">            <span class="c1">// 子匹配器2：关键指令名（锚定@后位置，优先匹配，确保加粗生效）
+</span></span></span><span class="line"><span class="ln">84</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/(?&lt;=@)\s*/</span> <span class="o">+</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;keyCmdRegex&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="sr">/\b(?=\s|=|$)/</span><span class="p">,</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;cmdNameKey&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">85</span><span class="cl">            <span class="c1">// 子匹配器3：普通指令名（锚定@后，排除关键指令名，确保基础样式生效）
+</span></span></span><span class="line"><span class="ln">86</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/(?&lt;=@)\s*/</span> <span class="o">+</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;normalCmdRegex&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="sr">/\b(?=\s|=|$)/</span><span class="p">,</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;cmdNameNormal&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">87</span><span class="cl">            <span class="c1">// 子匹配器4：关键参数名
+</span></span></span><span class="line"><span class="ln">88</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;keyParamRegex&#34;</span><span class="p">),</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;paramNameKey&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">89</span><span class="cl">            <span class="c1">// 子匹配器5：普通参数名
+</span></span></span><span class="line"><span class="ln">90</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="nx">include</span><span class="p">(</span><span class="s2">&#34;normalParamRegex&#34;</span><span class="p">),</span> <span class="mi">0</span><span class="o">:</span> <span class="s2">&#34;paramNameNormal&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">91</span><span class="cl">            <span class="c1">// 子匹配器6：参数值
+</span></span></span><span class="line"><span class="ln">92</span><span class="cl"><span class="c1"></span>            <span class="mi">0</span><span class="o">:</span> <span class="p">{</span><span class="nx">match</span><span class="o">:</span> <span class="sr">/=(.*?)[\s$]/</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="s2">&#34;paramValue&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">93</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">94</span><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="ln">95</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">96</span><span class="cl">  
+</span></span></code></pre></div><p>将以上代码复制下来保存为<code>KAGscript.mtsx</code>，然后在mt管理器内点击即可安装。</p>
+<h2 id="firstks第一个脚本">first.ks第一个脚本<a href="#firstks第一个脚本" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>打开<code>data/scenario/first.ks</code>。这是KAGeXpress目标默认的入口文件，我们的游戏也就从这里开始写。</p>
+<blockquote>
+<h3>注意</h3>
+mt管理器默认的编码格式是`UTF8`，但吉里吉里不支持这种编码，每次创建新文件需要手动修改为`GBK`。
+<br>ks脚本的编码格式默认是`ShiftJIS`，但是其针对日文，对中文不友好，所以我们应将编码格式改为`GBK`或`GB18030`，它们兼容`shiftJIS`且对中文支持良好。</blockquote>
+<p>ks脚本全称是<code>krkr/kag script</code>，即吉里吉里的脚本，它是一种标记式的剧情脚本，不是编程语言，所以理论上写ks脚本不需要任何编程基础。</p>
 
       </div></div>
 
