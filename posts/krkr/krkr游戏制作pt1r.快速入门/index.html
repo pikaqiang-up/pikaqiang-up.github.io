@@ -131,7 +131,7 @@
   <h1 class="post-title">
     <a href="/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1r.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">Krkr游戏制作pt1r.快速入门</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2025-12-06</time><span class="post-author">PIKAQIANG</span><span class="post-reading-time">3 min read (444 words)</span></div>
+  <div class="post-meta"><time class="post-date">2025-12-06</time><span class="post-author">PIKAQIANG</span><span class="post-reading-time">3 min read (476 words)</span></div>
 
   
     <span class="post-tags">
@@ -155,11 +155,13 @@
         <h1 id="krkr快速入门重制版">krkr快速入门（重制版）<a href="#krkr快速入门重制版" class="hanchor" ariaLabel="Anchor">#</a> </h1>
 <p>由于上一版写得跟屎一样，除了我基本没人能看懂，故开始写这一版。</p>
 <p>这一版我的目标是详细和通俗。</p>
+<p>具体流程大概是下载相关文件，配置编辑器开始项目，正式开始做游戏编写剧情脚本，游玩测试，打包分享。</p>
 <h2 id="开始">开始<a href="#开始" class="hanchor" ariaLabel="Anchor">#</a> </h2>
 <p>首先是基本文件。
 请先下载KAGeXpress。</p>
 <p>这是完整的KAGeXpress包 <a href="https://pikaqiang.lanzouq.com/iABSU3d0fzli">https://pikaqiang.lanzouq.com/iABSU3d0fzli</a><br>
 这是我修改过的KAGeXpress模板 <a href="https://pikaqiang.lanzouq.com/iwzcr3d0fkli">https://pikaqiang.lanzouq.com/iwzcr3d0fkli</a></p>
+<h3 id="碎碎念">碎碎念<a href="#碎碎念" class="hanchor" ariaLabel="Anchor">#</a> </h3>
 <p>原本的KAGeXpress来自keyFC同人发展促进会，由KCDDP制作。
 相关链接:<br>
 keyFC：http://krkr.keyfc.net/ <br>
@@ -172,7 +174,7 @@ KCDDP：http://kcddp.keyfc.net/<br>
 <h2 id="文件结构">文件结构<a href="#文件结构" class="hanchor" ariaLabel="Anchor">#</a> </h2>
 <p>下载完KAGeXpress的模板后，建议把它放在一个容易找到的文件夹。如<code>/sdcard/games/</code>。</p>
 <p>解压后你将看到像这样的文件结构：</p>
-<pre tabindex="0"><code class="language-tr" data-lang="tr">YourKrKrProject/
+<pre tabindex="0"><code class="language-tr" data-lang="tr">YourKrKrProject/                /*你的项目名*/
 ├── Data
 │   ├── startup.tjs
 │   ├── Config.tjs
@@ -201,6 +203,8 @@ KCDDP：http://kcddp.keyfc.net/<br>
 </ul>
 <h2 id="mt管理器段使用">mt管理器段使用<a href="#mt管理器段使用" class="hanchor" ariaLabel="Anchor">#</a> </h2>
 <p>mt管理器下载地址：<a href="https://mt2.cn/">mt2.cn</a></p>
+<p>mt管理器是我目前看来手机上最好的文件管理器了，
+并且自带apk打包工具，支持自定义的语法高亮，用来做吉里吉里的编辑器真的再适合不过。</p>
 <p>krkr的kag脚本语法高亮：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// require MT &gt;= 2.16.0
 </span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="p">{</span>
@@ -306,7 +310,24 @@ KCDDP：http://kcddp.keyfc.net/<br>
 mt管理器默认的编码格式是`UTF8`，但吉里吉里不支持这种编码，每次创建新文件需要手动修改为`GBK`。
 <br>ks脚本的编码格式默认是`ShiftJIS`，但是其针对日文，对中文不友好，所以我们应将编码格式改为`GBK`或`GB18030`，它们兼容`shiftJIS`且对中文支持良好。</blockquote>
 <p>ks脚本全称是<code>krkr/kag script</code>，即吉里吉里的脚本，它是一种标记式的剧情脚本，不是编程语言，所以理论上写ks脚本不需要任何编程基础。</p>
-
+<p>这里先贴一段ks脚本的样例：</p>
+<pre tabindex="0"><code class="language-ks" data-lang="ks">;定义游戏开始目录
+*menu|伟大的目录
+@menul
+@font size=55
+@locate x=100 y=50
+;游戏名称就叫这个了
+GalGAME的制作方法
+@locate x=120 y=120
+@font size=30
+[link target=*start]开始教程[endlink][r]
+[link exp=&#34;kag.close()&#34;]结束游戏[endlink]
+*start|第一章
+@advl
+「皮卡强」[r]嘿嘿嘿，我又来了！[p]
+「皮卡强」[r]首先是让我修改一下背景[p]
+@bg storage=white.png ;这个背景原本版KAGeXpress是没有的需要自己做一张对应分辨率的纯白色图片。
+</code></pre>
       </div></div>
 
   
