@@ -131,7 +131,7 @@
   <h1 class="post-title">
     <a href="/posts/krkr/krkr%E6%B8%B8%E6%88%8F%E5%88%B6%E4%BD%9Cpt1r.%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">Krkr游戏制作pt1r.快速入门</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2025-12-06</time><span class="post-author">PIKAQIANG</span><span class="post-reading-time">1 min read (126 words)</span></div>
+  <div class="post-meta"><time class="post-date">2025-12-06</time><span class="post-author">PIKAQIANG</span><span class="post-reading-time">1 min read (180 words)</span></div>
 
   
     <span class="post-tags">
@@ -218,19 +218,55 @@ mt管理器默认的编码格式是`UTF8`，但吉里吉里不支持这种编码
 <pre tabindex="0"><code class="language-ks" data-lang="ks">;定义游戏开始目录
 *menu|伟大的目录
 @menul
-@font size=55
-@locate x=100 y=50
+;kag默认是会一个字一个字地加载字符（模拟打字效果），但在[nowait]到[endnowait]的内容不会有这种效果
+[nowait]
+@startanchor ;标记这是游戏目录，之后回到主题画面时会回到这里
+@clickskip enabled=false ;关闭点击跳过，（kag默认会一个字一个字地加载字符，但是在加载过程中点击可以打断，立即加载完这一条字符）
+@font size=55 ;设置字体大小
+@locate x=100 y=50 ;设置下一次文字显示显示的位置
 ;游戏名称就叫这个了
 GalGAME的制作方法
-@locate x=120 y=120
+@locate x=120 y=150
 @font size=30
-[link target=*start]开始教程[endlink][r]
+;link是链接，类似HTML网页中的链接
+[link target=*start]开始教程[endlink]
+@locate x=120 y=230
+;exp指定的是一段tjs脚本，tjs不是基础教程该讲的内容，知道kag.close()函数会结束游戏关闭窗口就行
 [link exp=&#34;kag.close()&#34;]结束游戏[endlink]
+[endnowait]
+@clickskip enabled=true ;重新打开点击跳过
+@s ;停止，运行到这里停止游戏以等待玩家选择，不加这一句会直接执行下一行的内容
 *start|第一章
 @advl
 「皮卡强」[r]嘿嘿嘿，我又来了！[p]
 「皮卡强」[r]首先是让我修改一下背景[p]
 @bg storage=white.png ;这个背景原本版KAGeXpress是没有的需要自己做一张对应分辨率的纯白色图片。
+「皮卡强」[r]然后，试着加载一张立绘[p]
+@fg storage=w.png pos=c time=250
+「皮卡强」[r]来写小说[p]
+@val
+如你所见，[r]
+这是小说的显示样式，[l][r]
+可以换页。
+[p]
+就像这样。
+[p]
+来点选项[r]
+@font size=55
+[link target=*opt1]选项①[endlink][r]
+[link target=*opt2]选项②[endlink]
+[s]
+*opt1
+@advl
+「壹」[r]这里是伟大的选项1![p]
+@jump target=*bk
+*opt2
+@advl
+「贰」[r]我是选项贰。[p]
+@jump target=*bk
+*bk
+@advl
+「皮卡强」[r]这真是太有趣了。
 </code></pre>
       </div></div>
 
