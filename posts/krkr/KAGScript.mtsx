@@ -1,0 +1,96 @@
+// require MT >= 2.16.0
+{
+    name: ["KAGScript", ".ks"],
+    ignoreCase: false,
+    hide: false,
+
+    // 蓝紫系自定义样式：标签突出，指令弱化，样式分层清晰
+    styles: [
+        // 标签样式：高对比度行背景+加粗，视觉优先级最高
+        "tagWhole", #6a0dad$6522A2, #4b0082$563E86, @B,
+        // 指令符号样式（@/[]）：浅紫加粗，低存在感但有区分
+        "cmdSymbol", #8a2be2, #9370db, @B,
+        // 指令整体样式：浅蓝紫低饱和度，弱化整体观感
+        "instrWhole", #d8bfd8, #ABABC0,
+        // 普通指令名样式：淡紫蓝，基础区分（优先级高于instrWhole）
+        "cmdNameNormal", #9370db, #8a2be2,
+        // 关键指令名样式：同基础色+加粗，不额外提亮
+        "cmdNameKey", #9370db, #8a2be2, @B,
+        // 普通参数名样式：深紫蓝，不加粗
+        "paramNameNormal", #483d8b, #835CFF,
+        // 关键参数名样式：同基础色+加粗
+        "paramNameKey", #483d8b, #835CFF, @B,
+        // 参数值样式：深灰紫，极致弱化
+        "paramValue", #55437a, #624F8C
+    ],
+
+    // 注释配置：分号开头的行注释，支持快捷切换
+    comment: {startsWith: ";"},
+
+    // 括号配对：支持常见括号，辅助代码结构识别
+    bracketPairs: ["{}", "[]", "<>", "()"],
+
+    // 可复用正则/匹配器定义：关键词集中管理，便于修改
+    defines: [
+        // 关键指令名列表：修改只需调整此字符串内词汇
+        "keyCmdRegex": keywordsToRegex(
+            "link endlink jump call deffont position"
+            "micro endmicro"
+            "bgm bg fg se p l r"
+        ),
+        // 关键参数名列表：修改只需调整此字符串内词汇
+        "keyParamRegex": keywordsToRegex(
+            "storage file left right x y rule"
+        ),
+        // 普通指令名正则：排除关键指令名，自动适配关键词变更
+        "normalCmdRegex": /(?!#|\*|&)\w+/,
+        // 普通参数名正则：排除关键参数名，仅匹配带=的参数
+        "normalParamRegex": /(?!#|\*|&)\w+(?=\s*=)/
+    ],
+
+    contains: [
+        // 1. KAG标签匹配器：整行优先，确保最显眼
+        {
+            match: /(?m)^(\*.*?)(?:\n|.*)$/,
+            0: "tagWhole",
+            // 子匹配器细化标签ID和名称
+            0: {match: /\*([\w-]+)(?:\|(.+?))?(?=\n|$)/, 1: "paramNameKey", 2: "tagWhole"}
+        },
+
+        // 2. 块模式指令匹配器（[]包裹）：先匹配符号，再分层处理指令名/参数
+        {
+            match: /(\[.*?\])/,
+            0: "instrWhole",
+            // 子匹配器1：优先匹配指令符号[]
+            0: {match: /\[|\]/, 0: "cmdSymbol"},
+            // 子匹配器2：关键指令名（引用defines中的正则）
+            0: {match: /(?<=\[)\s*/ + include("keyCmdRegex") + /\s*(?=[=\s\]])/, 0: "cmdNameKey"},
+            // 子匹配器3：普通指令名（引用defines中的排除正则）
+            0: {match: /(?<=\[)\s*/ + include("normalCmdRegex") + /\s*(?=[=\s\]])/, 0: "cmdNameNormal"},
+            // 子匹配器4：关键参数名（引用defines中的正则）
+            0: {match: include("keyParamRegex"), 0: "paramNameKey"},
+            // 子匹配器5：普通参数名（引用defines中的正则）
+            0: {match: include("normalParamRegex"), 0: "paramNameNormal"},
+            // 子匹配器6：参数值
+            0: {match: /=(.*?)[\s\]]/, 1: "paramValue"}
+        },
+
+        // 3. 行模式指令匹配器（修复子匹配器2/3不生效问题，调整正则锚定和优先级）
+        {
+            match: /(?m)^(\s*@.*?)(?:\n|$)/,
+            0: "instrWhole",
+            // 子匹配器1：优先匹配@符号，确保符号样式先生效
+            0: {match: /@/, 0: "cmdSymbol"},
+            // 子匹配器2：关键指令名（锚定@后位置，优先匹配，确保加粗生效）
+            0: {match: /(?<=@)\s*/ + include("keyCmdRegex") + /\b(?=\s|=|$)/, 0: "cmdNameKey"},
+            // 子匹配器3：普通指令名（锚定@后，排除关键指令名，确保基础样式生效）
+            0: {match: /(?<=@)\s*/ + include("normalCmdRegex") + /\b(?=\s|=|$)/, 0: "cmdNameNormal"},
+            // 子匹配器4：关键参数名
+            0: {match: include("keyParamRegex"), 0: "paramNameKey"},
+            // 子匹配器5：普通参数名
+            0: {match: include("normalParamRegex"), 0: "paramNameNormal"},
+            // 子匹配器6：参数值
+            0: {match: /=(.*?)[\s$]/, 1: "paramValue"}
+        }
+    ]
+}
