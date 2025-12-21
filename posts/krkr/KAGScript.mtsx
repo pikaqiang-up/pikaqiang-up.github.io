@@ -37,10 +37,13 @@
             "link endlink jump call deffont position"
             "micro endmicro"
             "bgm bg fg se p l r"
+            "image freeimage"
         ),
         // 关键参数名列表：修改只需调整此字符串内词汇
         "keyParamRegex": keywordsToRegex(
-            "storage file left right x y rule"
+            "storage file target"
+            "left right top bottom x y rule"
+            "layer"
         ),
         // 普通指令名正则：排除关键指令名，自动适配关键词变更
         "normalCmdRegex": /(?!#|\*|&)\w+/,
@@ -94,3 +97,4 @@
         }
     ]
 }
+
