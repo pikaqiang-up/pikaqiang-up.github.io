@@ -7,8 +7,22 @@
     <generator>Hugo</generator>
     <language>zh_cn</language>
     <copyright>&lt;a href=&#34;https://github.com/pikaqiang-up&#34;&gt;pikaqiang-up&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 11 Dec 2025 15:58:29 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Dec 2025 09:10:44 +0000</lastBuildDate>
     <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Code</title>
+      <link>/tags/code/</link>
+      <pubDate>Sun, 28 Dec 2025 09:10:44 +0000</pubDate>
+      <guid>/tags/code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Github</title>
+      <link>/tags/github/</link>
+      <pubDate>Sun, 28 Dec 2025 09:10:44 +0000</pubDate>
+      <guid>/tags/github/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Krkr</title>
       <link>/tags/krkr/</link>
