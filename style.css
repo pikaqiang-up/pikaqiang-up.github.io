@@ -1,0 +1,40 @@
+/** Google Fonts **/
+
+/** 无衬线体 **/
+/**
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+.content {
+  font-family: "Noto Sans SC", sans-serif;
+  font-optical-sizing: auto;
+}
+**/
+/** 衬线体 **/
+/**
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+.content {
+  font-family: "Noto Serif SC", serif;
+  font-optical-sizing: auto;
+}
+**/
+/** 圆角方体 **/
+/**
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+.content {
+  font-family: "ZCOOL QingKe HuangYou", sans-serif;
+}
+**/
+/** 柳叶体 **/
+/**
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap');
+.content {
+ font-family: "ZCOOL XiaoWei", sans-serif;
+}
+**/
+/** Maple Mono NF-CN **/
+@import url("https://fontsapi.zeoseven.com/442/main/result.css");
+
+body {
+      font-family: "Maple Mono NF CN";
+          font-weight: normal;
+          
+}
