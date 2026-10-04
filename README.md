@@ -47,7 +47,20 @@ npm run format     # 用 Prettier 格式化代码
 - 移除主题自带的「感谢阅读」卡片（`PostAddendum` 组件与 `addendum` 内容集合）。
 - 改为 **CC BY-NC-SA 4.0 许可卡片**（`src/components/LicenseCard.astro`）：自动显示文章标题、链接、作者、发布日期与许可协议，并带 CC 水印。
 
-### 6. Mermaid 图表支持（原版不支持）
+### 6. Markdown 提示块：GitHub 标准告警语法
+
+- 新增 `src/plugins/remark-github-alerts.ts`，支持 GitHub 的引用块告警写法：
+
+  ```markdown
+  > [!NOTE]
+  > 提示内容
+  ```
+
+  支持 `NOTE` / `TIP` / `IMPORTANT` / `WARNING` / `CAUTION`，渲染为与原版 `:::note` **完全相同**的告警块（复用同样的配色与图标），标题按 GitHub 风格首字母大写。
+
+- 原版主题的 `:::note ... :::` 指令仍然可用，两者共存。
+
+### 7. Mermaid 图表支持（原版不支持）
 
 - 接入 [`astro-mermaid`](https://github.com/joesaby/astro-mermaid)：客户端渲染、按需加载、明暗自动重渲染。
 - 通过上面的 `data-theme=light/dark` 桥接，让 Mermaid 能跟随站点明暗切换。
@@ -55,12 +68,12 @@ npm run format     # 用 Prettier 格式化代码
 - 新增 **点击放大** 组件 `src/components/DiagramZoom.astro`：点击图表弹出全屏层，支持滚轮缩放、拖动平移、放大/缩小/重置、`Esc` 关闭。
 - 修复 `GiscusLoader.astro` 与改造后 `data-theme` 的兼容（Giscus 当前未启用）。
 
-### 7. 部署
+### 8. 部署
 
 - 新增 GitHub Pages 部署工作流 `.github/workflows/deploy.yml`（基于 Astro 官方模板），并补充了 **Pagefind 搜索索引** 步骤（官方模板直接执行 `astro build`，不会触发主题的 `postbuild` 脚本）。
 - 启用方式：仓库 **Settings → Pages → Source** 选择 **GitHub Actions**。
 
-### 8. 其他清理
+### 9. 其他清理
 
 - 删除主题开发目录 `dev/` 与上游 `.github` 工作流等无关文件。
 - `package.json` 更名为 `pikaqiang-blog`；新增 `.prettierignore`（排除 `dist`、`.astro`、`.examples` 等）。

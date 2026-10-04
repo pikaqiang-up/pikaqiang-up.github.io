@@ -119,9 +119,14 @@ flowchart TD
     class DONE done;
 ```
 
-:::note
-这是一条 note 提示块。把 `note` 换成 `tip`、`important`、`caution`、`warning` 可以切换样式。
-:::
+> [!NOTE]
+> 提示块现在支持 GitHub 标准语法：把 `NOTE` 换成 `TIP`、`IMPORTANT`、`CAUTION`、`WARNING` 即可切换样式。原版主题的 `:::note` 指令依然可用，两者共存。
+
+> [!TIP]
+> 这是一条 TIP 提示块，用来演示不同的样式。
+
+> [!WARNING]
+> 相邻的两个告警块之间需要**空行**分隔，否则会被解析成同一个引用块，第二个标记就成了普通文字。
 
 ## 下一步
 

@@ -17,6 +17,7 @@ import rehypeExternalLinks from 'rehype-external-links'
 import remarkDirective from 'remark-directive' /* Handle ::: directives as nodes */
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import { remarkAdmonitions } from './src/plugins/remark-admonitions' /* Add admonitions */
+import { remarkGithubAlerts } from './src/plugins/remark-github-alerts' /* GitHub-style > [!NOTE] alerts */
 import remarkCharacterDialogue from './src/plugins/remark-character-dialogue' /* Custom plugin to handle character admonitions */
 import remarkUnknownDirectives from './src/plugins/remark-unknown-directives' /* Custom plugin to handle unknown admonitions */
 import remarkMath from 'remark-math' /* for latex math support */
@@ -36,6 +37,7 @@ export default defineConfig({
       remarkDirective,
       remarkGithubCard,
       remarkAdmonitions,
+      remarkGithubAlerts,
       [remarkCharacterDialogue, { characters: siteConfig.characters }],
       remarkUnknownDirectives,
       remarkMath,
