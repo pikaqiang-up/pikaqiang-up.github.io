@@ -81,7 +81,7 @@ const config: SiteConfig = {
     // TODO: 替换为你的邮箱地址（只写地址，不需要 mailto:）
     email: '791349367@qq.com',
     // TODO: 把 000000 替换为你的 QQ 号
-    qq: 'https://wpa.qq.com/msgrd?v=3&uin=791349367&site=qq&menu=yes',
+    qq: 'https://qm.qq.com/q/c5RiMVm6f6',
     rss: true, // Set to true to include an RSS feed link in the footer
   },
   // Configuration for Giscus comments.

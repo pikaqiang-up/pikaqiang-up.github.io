@@ -110,12 +110,14 @@ if (postData.tags && postData.tags.length > 0) {
     )
   }
   {
-    <LicenseCard
-      title={postData.title}
-      url={new URL(`/posts/${post.id}`, Astro.site).href}
-      author={postData.author ?? siteConfig.author}
-      published={postData.published}
-    />
+    (
+      <LicenseCard
+        title={postData.title}
+        url={new URL(`/posts/${post.id}`, Astro.site).href}
+        author={postData.author ?? siteConfig.author}
+        published={postData.published}
+      />
+    )
   }
   {
     showSeries && series ? (

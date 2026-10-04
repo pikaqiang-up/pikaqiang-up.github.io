@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 import mdx from '@astrojs/mdx'
+import mermaid from 'astro-mermaid'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import expressiveCode from 'astro-expressive-code'
@@ -12,7 +13,6 @@ import remarkDescription from './src/plugins/remark-description' /* Add descript
 import remarkReadingTime from './src/plugins/remark-reading-time' /* Add reading time to frontmatter */
 import rehypeTitleFigure from './src/plugins/rehype-title-figure' /* Wraps titles in figures */
 import { remarkGithubCard } from './src/plugins/remark-github-card'
-import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 import rehypeExternalLinks from 'rehype-external-links'
 import remarkDirective from 'remark-directive' /* Handle ::: directives as nodes */
 import rehypeUnwrapImages from 'rehype-unwrap-images'
@@ -64,10 +64,29 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
+    // Must come before other markdown-processing integrations.
+    // `autoTheme` switches diagrams between mermaid's light/dark themes based on
+    // the `data-theme` attribute (the layout maps light/dark mode to "light"/"dark").
+    mermaid({
+      theme: 'default',
+      autoTheme: true,
+      enableLog: false,
+      mermaidConfig: {
+        securityLevel: 'loose',
+        fontFamily: '"JetBrains Maple Mono", monospace',
+      },
+    }),
     sitemap(),
     expressiveCode({
       themes: siteConfig.themes.include,
       useDarkModeMediaQuery: false,
+      // In "light-dark-auto" mode the layout sets `<html data-theme="light|dark">`
+      // (instead of the raw Shiki theme names), so make Expressive Code key its
+      // theme CSS on those generic values too — otherwise code blocks lose their
+      // colors because the generated selectors no longer match.
+      ...(siteConfig.themes.mode === 'light-dark-auto'
+        ? { themeCssSelector: (theme) => `[data-theme='${theme.type}']` }
+        : {}),
       defaultProps: {
         showLineNumbers: false,
         wrap: false,

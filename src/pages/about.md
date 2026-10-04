@@ -23,7 +23,6 @@ title: '关于'
 
 - **GitHub**：[pikaqiang-up](https://github.com/pikaqiang-up)
 - **邮箱**：[791349367@qq.com](mailto:791349367@qq.com)
-- **QQ**：791349367
 
 也可以直接使用页脚里的社交图标联系我。
 

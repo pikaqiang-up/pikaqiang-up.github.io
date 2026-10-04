@@ -35,7 +35,17 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     const category = giscusDiv.getAttribute('data-category')
     const categoryId = giscusDiv.getAttribute('data-category-id')
     const reactionsEnabled = giscusDiv.getAttribute('data-reactions-enabled')
-    const theme = document.documentElement.getAttribute('data-theme')
+    const rawTheme = document.documentElement.getAttribute('data-theme')
+    // In "light-dark-auto" mode `data-theme` is the generic "light"/"dark" value
+    // (used by astro-mermaid), while the giscus CSS files are keyed by the actual
+    // Shiki theme names. Map back to the real scheme before building the CSS URL.
+    const resolveTheme = (theme: string | null) => {
+      const root = document.documentElement
+      if (theme === 'light') return root.getAttribute('data-light-scheme') || theme
+      if (theme === 'dark') return root.getAttribute('data-dark-scheme') || theme
+      return theme
+    }
+    const theme = resolveTheme(rawTheme)
     if (
       !origin ||
       !repo ||
@@ -92,9 +102,16 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     const observer = new MutationObserver((mutations) => {
       mutations.forEach(async (mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-          const newTheme = document.documentElement.getAttribute('data-theme')
-          if (newTheme) {
-            await updateTheme(newTheme)
+          const rawTheme = document.documentElement.getAttribute('data-theme')
+          if (rawTheme) {
+            const root = document.documentElement
+            const theme =
+              rawTheme === 'light'
+                ? root.getAttribute('data-light-scheme') || rawTheme
+                : rawTheme === 'dark'
+                  ? root.getAttribute('data-dark-scheme') || rawTheme
+                  : rawTheme
+            await updateTheme(theme)
           }
         }
       })

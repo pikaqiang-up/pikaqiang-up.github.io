@@ -2,6 +2,7 @@
 import '~/styles/global.css'
 import Header from '~/components/Header.astro'
 import Footer from '~/components/Footer.astro'
+import DiagramZoom from '~/components/DiagramZoom.astro'
 import LightDarkAutoThemeLoader from '~/components/LightDarkAutoThemeLoader.astro'
 import SelectThemeLoader from '~/components/SelectThemeLoader.astro'
 import siteConfig from '~/site.config'
@@ -64,6 +65,21 @@ if (
 let lightTheme = themeMode === 'light-dark-auto' ? includedThemes[0] : undefined
 let darkTheme = themeMode === 'light-dark-auto' ? includedThemes[1] : undefined
 
+// Map the light/dark Shiki themes to the generic "light"/"dark" attribute values.
+// The CSS variable blocks are keyed by these values so that tooling which detects
+// light/dark mode via `data-theme` (e.g. astro-mermaid) works while the actual
+// color schemes stay configurable in site.config.ts.
+const lightThemeKey = 'light'
+const darkThemeKey = 'dark'
+const themeKeyAlias: Record<string, string> = {}
+if (themeMode === 'light-dark-auto') {
+  if (lightTheme) themeKeyAlias[lightTheme] = lightThemeKey
+  if (darkTheme) themeKeyAlias[darkTheme] = darkThemeKey
+}
+const lightThemeAttr = themeMode === 'light-dark-auto' ? lightThemeKey : undefined
+const darkThemeAttr = themeMode === 'light-dark-auto' ? darkThemeKey : undefined
+const defaultThemeAttr = themeKeyAlias[defaultTheme] ?? defaultTheme
+
 // Generate a hash to use for cache busting the theme settings in localStorage.
 const themeHash = crypto
   .createHash('md5')
@@ -104,7 +120,8 @@ for (const [themeId, themeStyles] of Object.entries(resolvedThemes)) {
     'magenta',
     'cyan',
   ])
-  cssLines.push(`:root[data-theme="${themeId}"] {`)
+  const cssKey = themeKeyAlias[themeId] ?? themeId
+  cssLines.push(`:root[data-theme="${cssKey}"] {`)
   for (const [key, value] of Object.entries(relevantStyles)) {
     cssLines.push(`--theme-${key}: ${value};`)
   }
@@ -116,9 +133,11 @@ let generatedCss: string = cssLines.join('\n')
 <!doctype html>
 <html
   lang="en"
-  data-theme={defaultTheme}
-  data-dark-theme={darkTheme}
-  data-light-theme={lightTheme}
+  data-theme={defaultThemeAttr}
+  data-dark-theme={darkThemeAttr}
+  data-light-theme={lightThemeAttr}
+  data-light-scheme={lightTheme}
+  data-dark-scheme={darkTheme}
   data-theme-mode={themeMode}
   data-theme-hash={themeHash}
 >
@@ -165,5 +184,6 @@ let generatedCss: string = cssLines.join('\n')
       </main>
       <Footer />
     </div>
+    <DiagramZoom />
   </body>
 </html>

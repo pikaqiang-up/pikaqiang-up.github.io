@@ -1,0 +1,13 @@
+# build output
+dist
+.astro
+
+# dependencies
+node_modules
+
+# archived upstream theme examples (not part of the site)
+.examples
+
+# lockfile & binary assets
+package-lock.json
+image.png

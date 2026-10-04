@@ -1,6 +1,6 @@
 {
-  "name": "multiterm-astro",
-  "description": "A terminal-inspired coding blog built with Astro.",
+  "name": "pikaqiang-blog",
+  "description": "PIKAQIANG 的个人博客（Astro + MultiTerm 主题）",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -28,6 +28,7 @@
     "@types/react-dom": "^19.1.9",
     "astro": "^5.13.5",
     "astro-expressive-code": "^0.41.3",
+    "astro-mermaid": "^2.1.0",
     "color": "^5.0.0",
     "date-fns": "^4.1.0",
     "emoji-regex": "^10.5.0",
@@ -38,6 +39,7 @@
     "markdown-it": "^14.1.0",
     "mdast-util-directive": "^3.1.0",
     "mdast-util-to-string": "^4.0.0",
+    "mermaid": "^11.17.2",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-external-links": "^3.0.0",
