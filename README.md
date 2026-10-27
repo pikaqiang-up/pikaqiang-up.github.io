@@ -65,7 +65,7 @@ npm run format     # 用 Prettier 格式化代码
 - 接入 [`astro-mermaid`](https://github.com/joesaby/astro-mermaid)：客户端渲染、按需加载、明暗自动重渲染。
 - 通过上面的 `data-theme=light/dark` 桥接，让 Mermaid 能跟随站点明暗切换。
 - 修复因桥接导致的 **Expressive Code 代码块配色失效**：在 `astro.config.mjs` 用 `themeCssSelector` 让代码块按 `light`/`dark` 生成选择器。
-- 新增 **点击放大** 组件 `src/components/DiagramZoom.astro`：点击图表弹出全屏层，支持滚轮缩放、拖动平移、放大/缩小/重置、`Esc` 关闭。
+- 新增 **点击放大** 组件 `src/components/DiagramZoom.astro`：点击图表弹出全屏层，支持滚轮缩放、拖动平移、**移动端双指捏合缩放**、放大/缩小/重置、`Esc` 关闭。
 - 修复 `GiscusLoader.astro` 与改造后 `data-theme` 的兼容（Giscus 当前未启用）。
 
 ### 8. 部署
@@ -77,6 +77,11 @@ npm run format     # 用 Prettier 格式化代码
 
 - 删除主题开发目录 `dev/` 与上游 `.github` 工作流等无关文件。
 - `package.json` 更名为 `pikaqiang-blog`；新增 `.prettierignore`（排除 `dist`、`.astro`、`.examples` 等）。
+
+### 10. 长表格横向滚动
+
+- 新增 `src/plugins/rehype-table-wrapper.ts`，自动把每张 Markdown 表格包进 `.table-wrapper`。
+- 长表格只在表格区域内左右滑动，不再把整页撑宽；普通表格外观不变。
 
 ## 目录结构
 

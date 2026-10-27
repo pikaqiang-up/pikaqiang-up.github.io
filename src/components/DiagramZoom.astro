@@ -82,6 +82,9 @@
     overflow: hidden;
     cursor: grab;
     touch-action: none;
+    overscroll-behavior: contain;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .diagram-zoom__viewport.is-dragging {
@@ -175,11 +178,6 @@
       apply()
     }
 
-    const zoomFromCenter = (factor: number) => {
-      const p = { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2 }
-      zoomAt(p.x, p.y, factor)
-    }
-
     // Open on click of a rendered diagram (event delegation).
     document.addEventListener('click', (event) => {
       const target = event.target as Element | null
@@ -217,55 +215,139 @@
       { passive: false },
     )
 
-    // Drag to pan
-    let dragging = false
+    // Pointer gestures: one finger / mouse drags to pan, two fingers pinch to zoom.
+    type PointerPos = { x: number; y: number }
+
+    const pointers = new Map<number, PointerPos>()
+
+    let mode: 'none' | 'drag' | 'pinch' = 'none'
     let moved = false
-    let startX = 0
-    let startY = 0
-    let startTx = 0
-    let startTy = 0
+    let suppressClickUntil = 0
+
+    let dragStartX = 0
+    let dragStartY = 0
+    let dragStartTx = 0
+    let dragStartTy = 0
+
+    let pinchStartDistance = 0
+    let pinchStartMidX = 0
+    let pinchStartMidY = 0
+    let pinchStartScale = 1
+    let pinchStartTx = 0
+    let pinchStartTy = 0
+
+    const centerOf = (a: PointerPos, b: PointerPos): PointerPos => ({
+      x: (a.x + b.x) / 2,
+      y: (a.y + b.y) / 2,
+    })
+
+    const distanceOf = (a: PointerPos, b: PointerPos) => Math.hypot(a.x - b.x, a.y - b.y)
+
+    // Position relative to the viewport center, which is the coordinate space used by `zoomAt`.
+    const toCenter = (p: PointerPos): PointerPos => {
+      const rect = viewport.getBoundingClientRect()
+      return { x: p.x - rect.left - rect.width / 2, y: p.y - rect.top - rect.height / 2 }
+    }
+
+    const beginDrag = (p: PointerPos) => {
+      mode = 'drag'
+      dragStartX = p.x
+      dragStartY = p.y
+      dragStartTx = tx
+      dragStartTy = ty
+      viewport.classList.add('is-dragging')
+    }
+
+    const beginPinch = () => {
+      const [a, b] = [...pointers.values()]
+      if (!a || !b) return
+      const mid = toCenter(centerOf(a, b))
+      pinchStartDistance = distanceOf(a, b)
+      pinchStartMidX = mid.x
+      pinchStartMidY = mid.y
+      pinchStartScale = scale
+      pinchStartTx = tx
+      pinchStartTy = ty
+      mode = 'pinch'
+      viewport.classList.add('is-dragging')
+    }
 
     viewport.addEventListener('pointerdown', (event) => {
-      if (event.button !== 0) return
-      dragging = true
-      moved = false
-      startX = event.clientX
-      startY = event.clientY
-      startTx = tx
-      startTy = ty
-      viewport.classList.add('is-dragging')
-      viewport.setPointerCapture(event.pointerId)
+      if (event.pointerType === 'mouse' && event.button !== 0) return
+      try {
+        viewport.setPointerCapture(event.pointerId)
+      } catch {
+        /* ignore */
+      }
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+
+      if (pointers.size === 1) {
+        moved = false
+        beginDrag({ x: event.clientX, y: event.clientY })
+      } else if (pointers.size === 2) {
+        beginPinch()
+      }
     })
 
     viewport.addEventListener('pointermove', (event) => {
-      if (!dragging) return
-      const dx = event.clientX - startX
-      const dy = event.clientY - startY
-      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true
-      tx = startTx + dx
-      ty = startTy + dy
-      apply()
+      if (!pointers.has(event.pointerId)) return
+      const p = { x: event.clientX, y: event.clientY }
+      pointers.set(event.pointerId, p)
+
+      if (pointers.size >= 2 && mode === 'pinch') {
+        const [a, b] = [...pointers.values()]
+        if (!a || !b || pinchStartDistance === 0) return
+
+        const nextScale = clamp(
+          pinchStartScale * (distanceOf(a, b) / pinchStartDistance),
+          MIN_SCALE,
+          MAX_SCALE,
+        )
+        const ratio = nextScale / pinchStartScale
+        const mid = toCenter(centerOf(a, b))
+
+        // Keep the content under the initial midpoint glued to the current midpoint.
+        tx = mid.x - ratio * (pinchStartMidX - pinchStartTx)
+        ty = mid.y - ratio * (pinchStartMidY - pinchStartTy)
+        scale = nextScale
+        moved = true
+        apply()
+      } else if (pointers.size === 1 && mode === 'drag') {
+        const dx = p.x - dragStartX
+        const dy = p.y - dragStartY
+        if (Math.abs(dx) + Math.abs(dy) > 4) moved = true
+        tx = dragStartTx + dx
+        ty = dragStartTy + dy
+        apply()
+      }
     })
 
-    const endDrag = (event: PointerEvent) => {
-      if (!dragging) return
-      dragging = false
-      viewport.classList.remove('is-dragging')
+    const endPointer = (event: PointerEvent) => {
+      pointers.delete(event.pointerId)
       try {
         viewport.releasePointerCapture(event.pointerId)
       } catch {
         /* ignore */
       }
-    }
-    viewport.addEventListener('pointerup', endDrag)
-    viewport.addEventListener('pointercancel', endDrag)
 
-    // Click the empty backdrop (but not the diagram / toolbar) to close
-    overlay.addEventListener('click', (event) => {
-      if (moved) {
-        moved = false
-        return
+      if (moved) suppressClickUntil = performance.now() + 400
+
+      if (pointers.size === 1) {
+        // A finger was lifted mid-pinch: continue with a one-finger drag.
+        const [remaining] = [...pointers.values()]
+        if (remaining) beginDrag(remaining)
+      } else if (pointers.size === 0) {
+        mode = 'none'
+        viewport.classList.remove('is-dragging')
       }
+    }
+    viewport.addEventListener('pointerup', endPointer)
+    viewport.addEventListener('pointercancel', endPointer)
+
+    // Click the empty backdrop (but not the diagram / toolbar) to close.
+    // Ignore the synthetic click that follows a pan/pinch gesture.
+    overlay.addEventListener('click', (event) => {
+      if (performance.now() < suppressClickUntil) return
       const el = event.target as Element | null
       if (el?.closest('.diagram-zoom__toolbar')) return
       if (el?.closest('.diagram-zoom__stage')) return

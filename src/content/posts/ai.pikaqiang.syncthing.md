@@ -1,6 +1,6 @@
 ---
 title: 'Syncthing的Android壳'
-published: 2026-20-25
+published: 2026-10-25
 description: '用ai写的Syncthing的Android壳，flutter'
 tags: ['AI','工具']
 ---

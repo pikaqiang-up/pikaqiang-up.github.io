@@ -573,6 +573,17 @@ article img {
     @apply uppercase text-left;
   }
 
+  /* Wide tables scroll horizontally on their own instead of overflowing the article. */
+  .table-wrapper {
+    @apply my-6.5 overflow-x-auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .table-wrapper > table {
+    @apply my-0;
+  }
+
   .katex-display {
     @apply overflow-x-auto py-2 my-4;
   }

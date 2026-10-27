@@ -12,6 +12,7 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import remarkDescription from './src/plugins/remark-description' /* Add description to frontmatter */
 import remarkReadingTime from './src/plugins/remark-reading-time' /* Add reading time to frontmatter */
 import rehypeTitleFigure from './src/plugins/rehype-title-figure' /* Wraps titles in figures */
+import { rehypeTableWrapper } from './src/plugins/rehype-table-wrapper' /* Makes wide tables scroll horizontally */
 import { remarkGithubCard } from './src/plugins/remark-github-card'
 import rehypeExternalLinks from 'rehype-external-links'
 import remarkDirective from 'remark-directive' /* Handle ::: directives as nodes */
@@ -56,6 +57,7 @@ export default defineConfig({
       ],
       rehypeUnwrapImages,
       rehypePixelated,
+      rehypeTableWrapper,
       rehypeKatex,
     ],
   },

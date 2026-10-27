@@ -1,6 +1,6 @@
 ---
 title: '算法模板'
-published: 2026-20-04
+published: 2026-10-02
 description: '一个普普通通的模板'
 tags: ['算法','编程']
 ---
