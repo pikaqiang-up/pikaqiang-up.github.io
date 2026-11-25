@@ -66,6 +66,7 @@ npm run format     # 用 Prettier 格式化代码
 - 通过上面的 `data-theme=light/dark` 桥接，让 Mermaid 能跟随站点明暗切换。
 - 修复因桥接导致的 **Expressive Code 代码块配色失效**：在 `astro.config.mjs` 用 `themeCssSelector` 让代码块按 `light`/`dark` 生成选择器。
 - 新增 **点击放大** 组件 `src/components/DiagramZoom.astro`：点击图表弹出全屏层，支持滚轮缩放、拖动平移、**移动端双指捏合缩放**、放大/缩小/重置、`Esc` 关闭。
+- **正文图片复用同一放大层**：点击图片即可放大，滚轮/拖动/双指捏合/工具栏/`Esc` 行为与 Mermaid 一致；被 `<a>` 包裹的图片（如徽章）保留原链接行为，不触发放大。
 - 修复 `GiscusLoader.astro` 与改造后 `data-theme` 的兼容（Giscus 当前未启用）。
 
 ### 8. 部署
@@ -82,6 +83,12 @@ npm run format     # 用 Prettier 格式化代码
 
 - 新增 `src/plugins/rehype-table-wrapper.ts`，自动把每张 Markdown 表格包进 `.table-wrapper`。
 - 长表格只在表格区域内左右滑动，不再把整页撑宽；普通表格外观不变。
+
+### 11. 主容器宽度与响应式目录
+
+- 主容器最大宽度 **920px**（`src/styles/global.css` 的 `.main-shell`），宽屏下正文保持 872px。
+- 在 **1280–约 1470px** 视口下，容器按 `min(920px, 100% - 540px)` 适当收窄，为右侧目录留出空间，页面不会产生横向滚动。
+- 目录在 **≥1280px** 时显示在正文右侧；**≥1720px** 时加宽到 320px。低于 1280px 时目录回到正文上方。
 
 ## 目录结构
 
@@ -111,7 +118,8 @@ astro.config.mjs      Astro 配置（集成、主题选择器等）
 | 关于页                        | `src/pages/about.md`                              |
 | 写文章                        | `src/content/posts/*.md`                          |
 | 文章底部许可卡片              | `src/components/LicenseCard.astro`                |
-| Mermaid 点击放大              | `src/components/DiagramZoom.astro`                |
+| Mermaid / 图片点击放大        | `src/components/DiagramZoom.astro`                |
+| 主容器宽度 / 响应式目录       | `src/styles/global.css`、`TableOfContents.astro`  |
 | 字体                          | `src/styles/global.css`                           |
 | 评论（Giscus，未启用）        | `src/site.config.ts` 的 `giscus` 与 `giscus.json` |
 

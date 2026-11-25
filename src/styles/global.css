@@ -110,6 +110,19 @@ button {
   @apply cursor-pointer;
 }
 
+/* Main shell: 920px on wide screens. Between 1280 and ~1470px it narrows
+   just enough to keep the table of contents in the right margin without
+   causing horizontal page overflow. */
+.main-shell {
+  max-width: 920px;
+}
+
+@media (min-width: 1280px) {
+  .main-shell {
+    max-width: min(920px, calc(100% - 540px));
+  }
+}
+
 article img {
   @apply block max-w-full border-8 border-foreground/10 rounded-xl overflow-hidden mx-auto;
 

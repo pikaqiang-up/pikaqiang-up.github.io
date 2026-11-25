@@ -109,7 +109,7 @@ flowchart TB
     ST -.->|"Web GUI 保留"| WEB["手机浏览器"]
 ```
 
-文件/函数级详细文档：[docs/README_DETAILED.md](docs/README_DETAILED.md)
+文件/函数级详细文档：[docs/README_DETAILED.md](https://github.com/pikaqiang-up/syncthing_shell/docs/README_DETAILED.md)
 
 ### 为什么二进制来自 Termux 仓库？
 

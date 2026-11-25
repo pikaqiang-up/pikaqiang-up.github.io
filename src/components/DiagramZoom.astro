@@ -17,8 +17,14 @@
 </div>
 
 <style is:global>
-  .mermaid svg {
+  .mermaid svg,
+  .prose img[data-zoomable] {
     cursor: zoom-in;
+  }
+
+  .prose img[data-zoomable]:hover {
+    outline: 2px solid color-mix(in srgb, var(--theme-accent) 45%, transparent);
+    outline-offset: 3px;
   }
 
   .diagram-zoom {
@@ -101,6 +107,15 @@
     max-width: none !important;
     height: auto;
   }
+
+  .diagram-zoom__stage img {
+    display: block;
+    max-width: none !important;
+    height: auto;
+    border-radius: 0.5rem;
+    background: var(--theme-background);
+    box-shadow: 0 12px 48px rgb(0 0 0 / 0.35);
+  }
 </style>
 
 <script>
@@ -132,21 +147,12 @@
       return { w: rect.width || 800, h: rect.height || 600 }
     }
 
-    const open = (svg: SVGSVGElement) => {
-      const { w, h } = svgSize(svg)
-      const clone = svg.cloneNode(true) as SVGSVGElement
-      clone.removeAttribute('style')
-      clone.setAttribute('width', String(w))
-      clone.setAttribute('height', String(h))
-      clone.style.width = `${w}px`
-      clone.style.height = `${h}px`
-      clone.style.maxWidth = 'none'
-
-      stage.replaceChildren(clone)
+    const show = (node: Element, w: number, h: number, maxFit: number) => {
+      stage.replaceChildren(node)
 
       const vw = viewport.clientWidth || window.innerWidth
       const vh = viewport.clientHeight || window.innerHeight
-      fitScale = clamp(Math.min((vw * 0.9) / w, (vh * 0.85) / h), MIN_SCALE, 2.5)
+      fitScale = clamp(Math.min((vw * 0.9) / w, (vh * 0.85) / h), MIN_SCALE, maxFit)
       scale = fitScale
       tx = 0
       ty = 0
@@ -158,6 +164,43 @@
       overlay.setAttribute('aria-hidden', 'false')
       isOpen = true
       overlay.querySelector<HTMLButtonElement>('[data-zoom-close]')?.focus()
+    }
+
+    const openSvg = (svg: SVGSVGElement) => {
+      const { w, h } = svgSize(svg)
+      const clone = svg.cloneNode(true) as SVGSVGElement
+      clone.removeAttribute('style')
+      clone.setAttribute('width', String(w))
+      clone.setAttribute('height', String(h))
+      clone.style.width = `${w}px`
+      clone.style.height = `${h}px`
+      clone.style.maxWidth = 'none'
+      show(clone, w, h, 2.5)
+    }
+
+    const openImage = (img: HTMLImageElement) => {
+      const rect = img.getBoundingClientRect()
+      const attrW = Number(img.getAttribute('width')) || 0
+      const attrH = Number(img.getAttribute('height')) || 0
+      const w = img.naturalWidth || attrW || Math.round(rect.width) || 800
+      const h = img.naturalHeight || attrH || Math.round(rect.height) || 600
+
+      const clone = img.cloneNode(true) as HTMLImageElement
+      clone.removeAttribute('srcset')
+      clone.removeAttribute('sizes')
+      clone.removeAttribute('width')
+      clone.removeAttribute('height')
+      clone.removeAttribute('loading')
+      clone.removeAttribute('style')
+      clone.removeAttribute('data-zoomable')
+      clone.removeAttribute('tabindex')
+      clone.removeAttribute('role')
+      clone.draggable = false
+      clone.style.width = `${w}px`
+      clone.style.height = 'auto'
+      clone.style.maxWidth = 'none'
+      // Do not upscale small raster images by default; they can still be zoomed in.
+      show(clone, w, h, 1)
     }
 
     const close = () => {
@@ -178,21 +221,39 @@
       apply()
     }
 
-    // Open on click of a rendered diagram (event delegation).
+    // Mark content images as zoomable. Images wrapped in links (badges, etc.)
+    // keep their normal navigation behavior.
+    document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+      if (img.closest('a') || img.hasAttribute('data-no-zoom')) return
+      img.setAttribute('data-zoomable', '')
+      img.tabIndex = 0
+      img.setAttribute('role', 'button')
+      if (!img.title) img.title = '点击放大'
+    })
+
+    // Open on click of a rendered diagram or a content image (event delegation).
     document.addEventListener('click', (event) => {
       const target = event.target as Element | null
+
+      const img = target?.closest?.('img[data-zoomable]') as HTMLImageElement | null
+      if (img && img.closest('.prose')) {
+        event.preventDefault()
+        openImage(img)
+        return
+      }
+
       const svg = target?.closest?.('.mermaid svg') as SVGSVGElement | null
       if (!svg) return
       event.preventDefault()
-      open(svg)
+      openSvg(svg)
     })
 
     // Toolbar
     overlay.querySelector('[data-zoom-in]')?.addEventListener('click', () => {
-      zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1.25)
+      zoomAt(0, 0, 1.25)
     })
     overlay.querySelector('[data-zoom-out]')?.addEventListener('click', () => {
-      zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1 / 1.25)
+      zoomAt(0, 0, 1 / 1.25)
     })
     overlay.querySelector('[data-zoom-reset]')?.addEventListener('click', () => {
       scale = fitScale
@@ -354,9 +415,22 @@
       close()
     })
 
-    // Esc to close
+    // Esc closes; Enter/Space opens a focused image.
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && isOpen) close()
+      if (event.key === 'Escape' && isOpen) {
+        close()
+        return
+      }
+
+      if (
+        !isOpen &&
+        (event.key === 'Enter' || event.key === ' ') &&
+        document.activeElement instanceof HTMLImageElement &&
+        document.activeElement.matches('.prose img[data-zoomable]')
+      ) {
+        event.preventDefault()
+        openImage(document.activeElement)
+      }
     })
   }
 </script>
